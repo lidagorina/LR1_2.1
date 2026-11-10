@@ -1,0 +1,153 @@
+# test_commands.txt — проверка Go версии (массив, списки, стек, очередь)
+
+#  собррать программу:  go build -o dbms .
+# Запуск из папки dbms-go:     bash test_commands.txt
+
+rm -f test.data
+set -v
+
+#  Массив (M) 
+./dbms --file test.data --query 'MCREATE arr'
+#   OK
+./dbms --file test.data --query 'MPUSH arr apple'
+#   apple
+./dbms --file test.data --query 'MPUSH arr banana'
+#   banana
+./dbms --file test.data --query 'MINSERT arr 1 kiwi'
+#   kiwi
+./dbms --file test.data --query 'MGET arr 1'
+#   kiwi
+./dbms --file test.data --query 'MSET arr 0 mango'
+#   mango
+./dbms --file test.data --query 'MLEN arr'
+#   3
+./dbms --file test.data --query 'PRINT arr'
+#   [mango, kiwi, banana]
+./dbms --file test.data --query 'MDEL arr 1'
+#   kiwi
+./dbms --file test.data --query 'PRINT arr'
+#   [mango, banana]
+./dbms --file test.data --query 'MGET arr 10'
+#   Ошибка: индекс 10 вне массива (длина 2)
+
+# Односвязный список (F)
+./dbms --file test.data --query 'FPUSH flist B'
+#   B
+./dbms --file test.data --query 'FPUSHHEAD flist A'
+#   A
+./dbms --file test.data --query 'FPUSHTAIL flist D'
+#   D
+./dbms --file test.data --query 'FINSERTBEFORE flist D C'
+#   C
+./dbms --file test.data --query 'FINSERTAFTER flist D E'
+#   E
+./dbms --file test.data --query 'PRINT flist'
+#   A -> B -> C -> D -> E
+./dbms --file test.data --query 'FPRINTREV flist'
+#   E -> D -> C -> B -> A
+./dbms --file test.data --query 'FFIND flist C'
+#   2
+./dbms --file test.data --query 'FGET flist 0'
+#   A
+./dbms --file test.data --query 'FDELBEFORE flist C'
+#   B
+./dbms --file test.data --query 'FDELAFTER flist C'
+#   D
+./dbms --file test.data --query 'FDELHEAD flist'
+#   A
+./dbms --file test.data --query 'FDELTAIL flist'
+#   E
+./dbms --file test.data --query 'FDEL flist C'
+#   C
+./dbms --file test.data --query 'PRINT flist'
+#   (пусто)
+./dbms --file test.data --query 'FDEL flist Z'
+#   Ошибка: элемент 'Z' не найден
+
+# Двусвязный список (L) 
+./dbms --file test.data --query 'LPUSH dlist 2'
+#   2
+./dbms --file test.data --query 'LPUSHHEAD dlist 1'
+#   1
+./dbms --file test.data --query 'LPUSHTAIL dlist 4'
+#   4
+./dbms --file test.data --query 'LINSERTBEFORE dlist 4 3'
+#   3
+./dbms --file test.data --query 'LINSERTAFTER dlist 4 5'
+#   5
+./dbms --file test.data --query 'PRINT dlist'
+#   1 <-> 2 <-> 3 <-> 4 <-> 5
+./dbms --file test.data --query 'LPRINTREV dlist'
+#   5 <-> 4 <-> 3 <-> 2 <-> 1
+./dbms --file test.data --query 'LFIND dlist 3'
+#   2
+./dbms --file test.data --query 'LGET dlist 4'
+#   5
+./dbms --file test.data --query 'LDELBEFORE dlist 3'
+#   2
+./dbms --file test.data --query 'LDELAFTER dlist 3'
+#   4
+./dbms --file test.data --query 'LDELHEAD dlist'
+#   1
+./dbms --file test.data --query 'LDELTAIL dlist'
+#   5
+./dbms --file test.data --query 'LDEL dlist 3'
+#   3
+./dbms --file test.data --query 'PRINT dlist'
+#   (пусто)
+
+# Стек (S)
+./dbms --file test.data --query 'SPUSH mystack item'
+#   item
+./dbms --file test.data --query 'SPUSH mystack second'
+#   second
+./dbms --file test.data --query 'SPUSH mystack third'
+#   third
+./dbms --file test.data --query 'PRINT mystack'
+#   вершина -> third | second | item
+./dbms --file test.data --query 'SPOP mystack'
+#   third
+./dbms --file test.data --query 'SPOP mystack'
+#   second
+./dbms --file test.data --query 'SPOP mystack'
+#   item
+./dbms --file test.data --query 'SPOP mystack'
+#   Ошибка: стек пуст
+
+# Очередь (Q)
+./dbms --file test.data --query 'QPUSH myqueue element'
+#   element
+./dbms --file test.data --query 'QPUSH myqueue next'
+#   next
+./dbms --file test.data --query 'QPUSH myqueue last'
+#   last
+./dbms --file test.data --query 'PRINT myqueue'
+#   начало -> element | next | last <- конец
+./dbms --file test.data --query 'QPOP myqueue'
+#   element
+./dbms --file test.data --query 'QPOP myqueue'
+#   next
+./dbms --file test.data --query 'QPOP myqueue'
+#   last
+./dbms --file test.data --query 'QPOP myqueue'
+#   Ошибка: очередь пуста
+
+# Деревья — только в C++ версии 
+./dbms --file test.data --query 'TINSERT mytree 10'
+#   Ошибка: деревья реализованы в C++ версии
+
+# Ошибки 
+./dbms --file test.data --query 'PRINT nosuch'
+#   Ошибка: структура 'nosuch' не найдена
+./dbms --file test.data --query 'SPOP nosuch'
+#   Ошибка: структура 'nosuch' не найдена
+./dbms --file test.data --query 'HELLO bar'
+#   Ошибка: неизвестная команда HELLO
+./dbms --file test.data --query 'SFOO mystack'
+#   Ошибка: неизвестная команда SFOO
+./dbms --file test.data --query 'SPUSH arr x'
+#   Ошибка: 'arr' имеет тип ARRAY, команда SPUSH к нему не подходит
+./dbms --file test.data --query 'spush MixedCase Hello'
+#   Hello
+./dbms --file test.data --query 'PRINT MixedCase'
+#   вершина -> Hello

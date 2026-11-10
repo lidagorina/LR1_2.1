@@ -1,0 +1,18 @@
+# Собранные программы
+/dbms
+/dbms.exe
+dbms-go/dbms
+dbms-go/dbms.exe
+
+# Папка сборки CMake
+build/
+
+# Файлы с данными, которые создаёт программа при запуске
+*.data
+!example.data
+
+# Служебные файлы
+.DS_Store
+.vscode/
+~$*
+.~lock.*
