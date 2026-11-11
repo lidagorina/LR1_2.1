@@ -1,11 +1,8 @@
-// interface.go — то, что пакет stack показывает наружу (для main.go)
 package stack
 
 import (
 	"dbms-go/core/common"
 )
-
-// Load — заполнить стек элементами из файла.
 
 // В файле стек записан от вершины ко дну, поэтому кладём с конца.
 func Load(s *Stack, items []string) {
@@ -14,13 +11,10 @@ func Load(s *Stack, items []string) {
 	}
 }
 
-// Print — вывод на экран (команда PRINT)
 func Print(s *Stack) string { return toString(s) }
 
-// ToText — строка для файла
 func ToText(s *Stack) string { return toText(s) }
 
-// Command — выполнить команду и вернуть ответ
 func Command(s *Stack, cmd string, args []string) string {
 	switch cmd {
 	case "SPUSH":

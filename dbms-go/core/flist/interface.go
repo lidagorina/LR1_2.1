@@ -1,5 +1,3 @@
-// interface.go — то, что пакет flist показывает наружу (для main.go).
-
 package flist
 
 import (
@@ -15,13 +13,10 @@ func Load(list *FList, items []string) {
 	}
 }
 
-// Print — вывод на экран (команда PRINT)
 func Print(list *FList) string { return toString(list) }
 
-// ToText — строка для файла
 func ToText(list *FList) string { return toText(list) }
 
-// Command — выполнить команду и вернуть ответ
 func Command(list *FList, cmd string, args []string) string {
 	switch cmd {
 	case "FPUSHHEAD":

@@ -1,5 +1,3 @@
-// interface.go — то, что пакет array показывает наружу (для main.go)
-
 package array
 
 import (
@@ -15,13 +13,13 @@ func Load(a *Array, items []string) {
 	}
 }
 
-// Print — вывод на экран (команда PRINT):  [a, b, c]
+// [a, b, c]
 func Print(a *Array) string { return toString(a) }
 
-// ToText — строка для файла:  a b c
+// a b c
 func ToText(a *Array) string { return toText(a) }
 
-// Command — выполнить команду M... и вернуть ответ
+// выполнить команду M
 func Command(a *Array, cmd string, args []string) string {
 	switch cmd {
 	case "MCREATE":

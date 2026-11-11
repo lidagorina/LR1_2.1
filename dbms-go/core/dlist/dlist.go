@@ -1,5 +1,4 @@
-// Пакет dlist — двусвязный список (команды на букву L)
-// В этом файле — сама структура и операции над ней
+// dlist — двусвязный список (команды на букву L)
 
 // искать его с начала не нужно (O(1) вместо O(n)).
 package dlist
@@ -114,7 +113,7 @@ func delTail(list *DList) string {
 func delBefore(list *DList, target string) string {
 	node := findNode(list, target)
 	if node.prev == nil {
-		common.Fail("перед '" + target + "' нет элементов")
+		common.Fail("перед - " + target + " - нет элементов")
 	}
 	return removeNode(list, node.prev)
 }
@@ -146,7 +145,7 @@ func find(list *DList, value string) int {
 
 func get(list *DList, index int) string {
 	if index >= list.size {
-		common.Fail("индекс " + strconv.Itoa(index) + " вне списка (длина " + strconv.Itoa(list.size) + ")")
+		common.Fail("индекс " + strconv.Itoa(index) + " вне списка - длина " + strconv.Itoa(list.size))
 	}
 	cur := list.head
 	for i := 0; i < index; i++ {

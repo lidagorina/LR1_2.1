@@ -1,4 +1,4 @@
-// Пакет flist — односвязный список (команды на букву F)
+// flist — односвязный список (команды на букву F)
 
 package flist
 
@@ -14,7 +14,7 @@ type FNode struct {
 	next  *FNode
 }
 
-// FList — первый узел, последний узел, количество
+// первый узел, последний узел, количество
 type FList struct {
 	head *FNode
 	tail *FNode
@@ -50,8 +50,6 @@ func insertAfterNode(list *FList, node *FNode, value string) {
 	list.size++
 }
 
-// Убрать узел из списка и вернуть его значение.
-// Удалять память вручную не нужно — это делает сборщик мусора Go.
 func removeNode(list *FList, node *FNode) string {
 	if node == list.head {
 		list.head = node.next

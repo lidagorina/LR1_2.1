@@ -5,10 +5,10 @@
 package main
 
 import (
-	"bufio"
-	"flag"
+	"bufio" // чтение файла
+	"flag"  //разбор аргументов
 	"fmt"
-	"os"
+	"os" //открыть/записать файл
 	"sort"
 	"strings"
 

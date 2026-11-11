@@ -9,13 +9,13 @@ import (
 	"dbms-go/core/common"
 )
 
-// Длина data — это ёмкость (сколько поместится), size — сколько занято.
+// data — сколько поместится, size — сколько занято.
 type Array struct {
 	data []string
 	size int
 }
 
-// Увеличить память в 2 раза
+// Увеличить память
 func grow(a *Array) {
 	newCapacity := len(a.data) * 2
 	if newCapacity == 0 {
@@ -25,12 +25,12 @@ func grow(a *Array) {
 	for i := 0; i < a.size; i++ {
 		newData[i] = a.data[i]
 	}
-	a.data = newData // старый кусок уберёт сборщик мусора
+	a.data = newData
 }
 
 func checkIndex(a *Array, index int) {
 	if index >= a.size {
-		common.Fail("индекс " + strconv.Itoa(index) + " вне массива (длина " + strconv.Itoa(a.size) + ")")
+		common.Fail("индекс " + strconv.Itoa(index) + " вне массива - длина " + strconv.Itoa(a.size))
 	}
 }
 
@@ -46,7 +46,7 @@ func push(a *Array, value string) {
 // O(n): элементы правее индекса сдвигаются вправо
 func insert(a *Array, index int, value string) {
 	if index > a.size {
-		common.Fail("индекс " + strconv.Itoa(index) + " вне массива (длина " + strconv.Itoa(a.size) + ")")
+		common.Fail("индекс " + strconv.Itoa(index) + " вне массива - длина " + strconv.Itoa(a.size))
 	}
 	if a.size == len(a.data) {
 		grow(a)

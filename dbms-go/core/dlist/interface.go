@@ -1,5 +1,3 @@
-// interface.go — то, что пакет dlist показывает наружу (для main.go)
-
 package dlist
 
 import (
@@ -15,13 +13,11 @@ func Load(list *DList, items []string) {
 	}
 }
 
-// Print — вывод на экран (команда PRINT)
 func Print(list *DList) string { return toString(list) }
 
-// ToText — строка для файла
+// строка для файла
 func ToText(list *DList) string { return toText(list) }
 
-// Command — выполнить команду и вернуть ответ
 func Command(list *DList, cmd string, args []string) string {
 	switch cmd {
 	case "LPUSHHEAD":
