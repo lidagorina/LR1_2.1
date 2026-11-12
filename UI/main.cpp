@@ -1,16 +1,8 @@
 // UI/main.cpp — интерфейс командной строки (главный файл программы)
 
-
 // Запуск:  ./dbms --file file.data --query 'SPUSH mystack item'
 
-// программа делает
-//   1. читает аргументы --file и --query;
-//   2. загружает все структуры из файла;
-//   3. по первой букве команды выбирает структуру и выполняет команду;
-//   4. если данные изменились, записывает файл заново;
-//   5. печатает ответ.
-
-// Формат файла — одна структура на строку:  ТИП имя элемент1 элемент2 ...
+// Формат файла — одна структура на строку:  ТИП имя аргументы
 #include <cctype>
 #include <fstream>
 #include <map>
@@ -86,7 +78,8 @@ void loadFile(const string& fileName) {
             for (size_t i = 2; i < w.size(); i++) queuePush(q, w[i]);
         } else if (type == "TREE") {
             Tree& t = trees[name];
-            for (size_t i = 2; i < w.size(); i++) arrayPush(t.cells, w[i]);
+            // for (size_t i = 2; i < w.size(); i++) arrayPush(t.cells, w[i]);
+            treeLoad(t, vector<string>(w.begin() + 2, w.end()));
         }
     }
 }

@@ -8,23 +8,45 @@
 #ifndef TREE_H
 #define TREE_H
 
-#include "array.h"
+#include "common.h"
 
-struct Tree {
-    Array cells;
+struct TNode {
+    string value;
+    TNode* left = nullptr;   // левый потомок
+    TNode* right = nullptr;  // правый потомок
 };
 
-void treeInsert(Tree& t, const string& value);               // в первое свободное место
-void treeInsertAt(Tree& t, int index, const string& value);  // в заданную ячейку
-bool treeContains(const Tree& t, const string& value);       // есть ли элемент
-bool treeIsComplete(const Tree& t);  // все уровни полные, последний — слева направо
-bool treeIsFull(const Tree& t);      // у каждого узла 0 или 2 потомка
-string treeDrawUpright(const Tree& t); 
+struct Tree {
+    TNode* root = nullptr;
+};
 
-string treePrint(const Tree& t);
-string treeToText(const Tree& t);
-void treeFree(Tree& t);
+void treeInsert(Tree& t, const string& value);               
+void treeInsertAt(Tree& t, int index, const string& value);  
+bool treeContains(const Tree& t, const string& value);       
+bool treeIsComplete(const Tree& t);  
+bool treeIsFull(const Tree& t);      
+
+string treeDrawUpright(const Tree& t);  
+string treePrint(const Tree& t);        
+string treeToText(const Tree& t);       
+void treeLoad(Tree& t, const vector<string>& items);  
+void treeFree(Tree& t);                 
 
 string treeCommand(Tree& t, const string& cmd, const vector<string>& args);
+
+
+
+// void treeInsert(Tree& t, const string& value);               // в первое свободное место
+// void treeInsertAt(Tree& t, int index, const string& value);  // в заданную ячейку
+// bool treeContains(const Tree& t, const string& value);       // есть ли элемент
+// bool treeIsComplete(const Tree& t);  // все уровни полные, последний — слева направо
+// bool treeIsFull(const Tree& t);      // у каждого узла 0 или 2 потомка
+// string treeDrawUpright(const Tree& t); 
+
+// string treePrint(const Tree& t);
+// string treeToText(const Tree& t);
+// void treeFree(Tree& t);
+
+// string treeCommand(Tree& t, const string& cmd, const vector<string>& args);
 
 #endif

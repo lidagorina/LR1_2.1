@@ -3,7 +3,7 @@
 
 #include "dlist.h"
 
-// искать его с начала не нужно (O(1) вместо O(n)).
+
 static DNode* findNode(const DList& list, const string& value) {
     for (DNode* cur = list.head; cur != nullptr; cur = cur->next) {
         if (cur->value == value) return cur;
@@ -142,7 +142,7 @@ string dlistPrint(const DList& list) {
 
 // Идём с хвоста по ссылкам prev
 string dlistPrintReverse(const DList& list) {
-    if (list.tail == nullptr) return "(пусто)";
+    if (list.tail  == nullptr) return "(пусто)";
     string result;
     for (DNode* cur = list.tail; cur != nullptr; cur = cur->prev) {
         if (cur != list.tail) result += " <-> ";
