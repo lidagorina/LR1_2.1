@@ -2,6 +2,7 @@
 #include "tree.h"
 #include <queue>
 
+
 static const string EMPTY = "#";  // пустая ячейка
 
 // Создать новый узел
@@ -9,7 +10,7 @@ static TNode* nodeAt(const Tree& t, int i) {
     if (i == 0) return t.root;
     TNode* parent = nodeAt(t, (i - 1) / 2);
     if (parent == nullptr) return nullptr;
-    return (i % 2 == 1) ? parent->left : parent->right;  // вернуть левого ребёнка родителя, иначе правого
+    return (i % 2 == 1) ? parent->left : parent->right;  // вернуть левого ребёнка родителя или правого
 }
 
 // Есть ли узел в ячейке i
